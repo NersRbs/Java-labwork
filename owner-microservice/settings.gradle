@@ -1,0 +1,8 @@
+rootProject.name = 'owner-microservice'
+
+include("owner-dao")
+include("owner-service")
+include("owner-controller")
+include("owner-client")
+include("owner-adapter")
+

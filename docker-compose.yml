@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres-users:
+    image: postgres:latest
+    container_name: users
+    environment:
+      - POSTGRES_USER=my_user
+      - POSTGRES_PASSWORD=my_password
+      - POSTGRES_DB=users
+    ports:
+      - "6432:5432"
+    restart: unless-stopped
+
+  postgres-cats:
+    image: postgres:latest
+    container_name: cats
+    environment:
+      - POSTGRES_USER=my_user
+      - POSTGRES_PASSWORD=my_password
+      - POSTGRES_DB=cats
+    ports:
+      - "7432:5432"
+    restart: unless-stopped
+
+  postgres-owners:
+    image: postgres:latest
+    container_name: owners
+    environment:
+      - POSTGRES_USER=my_user
+      - POSTGRES_PASSWORD=my_password
+      - POSTGRES_DB=owners
+    ports:
+      - "8432:5432"
+    restart: unless-stopped
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+    ports:
+      - "9092:9092"

@@ -1,0 +1,8 @@
+rootProject.name = 'api-gateway'
+
+include("dao")
+include("service")
+include("controller")
+
+includeBuild("../cat-microservice")
+includeBuild("../owner-microservice")

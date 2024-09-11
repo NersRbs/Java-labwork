@@ -1,0 +1,5 @@
+rootProject.name = 'Java-labworks'
+
+includeBuild("api-gateway")
+includeBuild("cat-microservice")
+includeBuild("owner-microservice")
